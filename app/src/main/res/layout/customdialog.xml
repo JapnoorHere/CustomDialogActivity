@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:hint="Enter Age"
+        android:inputType="number"
+        android:digits="1234567890"
         android:layout_marginLeft="10dp"
         />
     <TextView

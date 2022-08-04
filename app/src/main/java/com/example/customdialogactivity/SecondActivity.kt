@@ -27,15 +27,28 @@ class SecondActivity : AppCompatActivity() {
             dialog.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT)
             dialogBinding.etName.setText(binding.tvName2.text.toString())
             dialogBinding.etAge.setText(binding.tvAge2.text.toString())
+            if(binding.tvGender2.text.toString().equals("He")){
+                dialogBinding.rbHe.isChecked=true
+            }
+            else if(binding.tvGender2.text.toString().equals("She")){
+                dialogBinding.rbShe.isChecked=true
+            }
+            else if(binding.tvGender2.text.toString().equals("Other")){
+                dialogBinding.rbOther.isChecked=true
+                dialogBinding.etDescription.visibility=View.VISIBLE
+                dialogBinding.etDescription.setText(binding.tvDescription.text.toString())
+            }
+
+            dialogBinding.rgGender.setOnCheckedChangeListener { group, id ->
+                when(id) {
+                    R.id.rbOther -> dialogBinding.etDescription.visibility = View.VISIBLE
+                    else -> {
+                        dialogBinding.etDescription.visibility = View.GONE
+                    }
+                }
+            }
                dialogBinding.btnSubmit.setOnClickListener{
-                   dialogBinding.rgGender.setOnCheckedChangeListener { group, id ->
-                       when(id) {
-                           R.id.rbOther -> dialogBinding.etDescription.visibility = View.VISIBLE
-                           else -> {
-                               dialogBinding.etDescription.visibility = View.GONE
-                           }
-                       }
-                   }
+
                    if(dialogBinding.etName.text.toString().isNullOrEmpty()){
                        Toast.makeText(this,"Enter name",Toast.LENGTH_SHORT).show()
                    }
@@ -49,6 +62,7 @@ class SecondActivity : AppCompatActivity() {
 
                        binding.tvName2.setText(dialogBinding.etName.text.toString())
                        binding.tvAge2.setText(dialogBinding.etAge.text.toString())
+                       binding.tvDescription.setText(dialogBinding.etDescription.text.toString())
                        if(dialogBinding.rbHe.isChecked){
                            binding.tvGender2.setText("He")
                        }
